@@ -1,0 +1,36 @@
+<?php $this->headTitle('prestations de service'); 
+
+//var_dump($prestationsServices);
+//die();
+?>
+    <!----section services---->	
+    <section class="ftco-section">
+			<div class="container">
+				<div class="row justify-content-center mb-5 pb-2">
+					<div class="col-md-8 text-center heading-section ftco-animate">
+						<h2 class="mb-4 text-danger">Meilleurs Services</h2>
+						<p>NOS PRESTATIONS</p>
+					</div>
+				</div>
+				<div class="row no-gutters">
+					<?php foreach($prestationsServices as $prestationsService){?>
+						<div class="col-lg-4 d-flex">
+							<div class="services-2 noborder-left text-center ftco-animate">
+								<div class="icon mt-2 d-flex justify-content-center align-items-center"><span class="<?=$prestationsService['image']?>"></span></div>
+								<div class="text media-body">
+									<h3><?=$prestationsService['libelle']?></h3>
+										<ul>
+											<?php foreach($prestationsService['sections'] as $section) { ?>
+												<li class="text-left"><p><span class="font-weight-bold text-uppercase"> <?=$section->getLibelle()?></span>: <?=$section->getText()?></p></li>
+											<?php } ?>
+										</ul>
+									
+								</div>
+							</div>
+						</div>
+					<?php } ?>
+				</div>
+			</div>
+	</section><!----end section service---->
+    
+     

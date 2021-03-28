@@ -1,0 +1,180 @@
+<!--CONTENT-->
+<!--Slide Section-->
+<section class="home-slider owl-carousel">
+    <?php foreach($slides as $slide){?>
+      <div class="slider-item" style="background-image:url(img/slides/<?=$slide->getImage()?>);">
+      	<div class="overlay"></div>
+        <div class="container">
+          <div class="row no-gutters slider-text align-items-center justify-content-start" data-scrollax-parent="true">
+          <div class="col-md-7 ftco-animate">
+              <span class="subheading text-danger"><?=$slide->getTitre()?></span>
+            <h1 class="mb-4"><?=$slide->getLibelle()?></h1>
+            <?php $lien = $slide->getUrlBtnService(); ?>
+            <p><a href="<?=$this->basePath($lien)?>" class="btn btn-danger px-4 py-3 mt-3"><?=$slide->getLibelleBtnService()?></a></p>
+          </div>
+        </div>
+        </div>  
+      </div>
+    <?php } ?>
+</section><!----Fin slides section---->
+    
+    <!----section feature---->
+    <section class="ftco-section">
+	    <div class="container">
+		<div class="row d-flex">
+			<div class="col-md-5 order-md-last wrap-about align-items-stretch">
+				<div class="wrap-about-border ftco-animate">
+					<div class="img" style="background-image: url(img/gr1.png); border"></div>
+					<div class="text">
+								<h3></h3>
+								<p></p>
+								<p></p>
+								<!--<p><a href="#" class="btn btn-primary py-3 px-4">Contact us</a></p>-->
+				</div>
+			</div>
+		</div>
+					<div class="col-md-7 wrap-about pr-md-4 ftco-animate">
+                                                <h3 class="mb-4 text-danger">NOS PRINCIPALES CARACTÉRISTIQUES</h3>
+						<p class="grpacceuil">Gabiriel & Raphaële Consulting s'articule au tour de quatre axes fondamentaux dans ses prestations de services avec les clients.</p>
+						<div class="row mt-5">
+							<div class="col-lg-6">
+								<div class="services text-center">
+									<div class="icon mt-2 d-flex justify-content-center align-items-center"><span class="flaticon-collaboration"></span></div>
+									<div class="text media-body">
+										<h3>MUTUALITE</h3>
+										<p class="text-left">Un groupement qui essentiellement aux moyens de cotisations de leurs membres, se proposent de mener, dans l’intérêt de ceux-ci et de leurs ayants droit, une action de prévoyance, d’entraide et de solidarité visant la prévention des risques sociaux liés à la personne et la réparation de leurs conséquences.</p>
+									</div>
+								</div>
+								<div class="services text-center">
+									<div class="icon mt-2 d-flex justify-content-center align-items-center"><span class="flaticon-analysis"></span></div>
+									<div class="text media-body">
+										<h3>CONSEIL</h3>
+                                                                                <p class="text-left">Nous délivrons des avis ou des recommandations sur ce qu'il convient de faire dans votre organisation pour en améliorer les différents aspects; Nous vous fournissons des orientations adaptées dans l'implémentation des solutions pour votre développement.</p><br><br>
+									</div>
+								</div>
+							</div>
+							      <div class="col-lg-6">
+								<div class="services text-center">
+									<div class="icon mt-2 d-flex justify-content-center align-items-center"><span class="flaticon-search-engine"></span></div>
+									<div class="text media-body">
+										<h3>ASSISTANCE</h3>
+										<p class="text-left">Nous vous appuyons dans votre gestion à travers un personnel qualifié dans divers domaines en vue d'améliorer votre productivité et de garantir l'exactitude de vos données et résultats.</p><br><br><br><br><br>
+									</div>
+								</div>
+								<div class="services text-center">
+									<div class="icon mt-2 d-flex justify-content-center align-items-center"><span class="flaticon-handshake"></span></div>
+									<div class="text media-body">
+										<h3>FORMATIONS</h3>
+										<p class="text-left">des formations inter-entreprises, des formations intra-entreprises, des formations à l'endroit des particuliers et des organisations sociales afin de favoriser le développement durable économique et social. A cet effet, nous avons des consultants experts dans les divers domaines.</p>
+							</div>
+						</div>
+					</div>
+			        </div>
+			</div>
+		</div>
+	    </div>
+    </section><!----End section feature---->               
+            <!----section Banière---->
+		
+    <!--<section class="ftco-intro ftco-no-pb img" style="background-image: url(img/bg_1.jpg);">
+    	<div class="container">
+    		<div class="row justify-content-center">
+            <div class="col-lg-9 col-md-8 d-flex align-items-center heading-section heading-section-white ftco-animate">
+              <marquee behavior="scroll"><h2 class="mb-3 mb-md-0 text-white">Vous obtenez toujours les meilleurs conseils!</h2></marquee>
+              </div>
+          <!--<div class="col-lg-3 col-md-4 ftco-animate">
+          	<p class="mb-0"><a href="#" class="btn btn-white py-3 px-4">Request Quote</a></p>
+            </div>
+           </div>	
+    	</div>
+    </section> <!----end section banière---->
+    
+                 <!----section clients et partenaires---->
+
+    <!--<section class="ftco-section testimony-section">
+                <div class="container">
+                  <div class="row justify-content-center mb-5">
+                    <div class="col-md-8 text-center heading-section ftco-animate">
+                      <h2 class="mb-4 text-danger">Clients & Partenaires</h2>
+                      <p>Ces structures on fait confiance à Gabriel & Raphaële Consulting</p>
+                    </div>
+                  </div>
+                    <div class="row ftco-animate justify-content-center">
+                      <div class="col-md-12">
+                        <div class="carousel-testimony owl-carousel">
+                          <div class="item">
+                            <div class="testimony-wrap d-flex">
+                              <div class="user-img" style="background-image: url(img/testyimg/dgemci.png)">
+                              </div>
+                              <div class="text pl-4">
+                                    <span class="quote d-flex align-items-center justify-content-center">
+                                  <i class="icon-quote-left"></i>
+                                </span>
+                                <p>Direction Générale des Ecoles Méthodistes.</p>
+                                <p class="name font-weight-bold">DGEMCI</p>
+                                <span class="position text-danger font-italic">Ils nous ont fait confiance!</span>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="item">
+                            <div class="testimony-wrap d-flex">
+                              <div class="user-img" style="background-image: url(img/testyimg/meemci.png)">
+                              </div>
+                              <div class="text pl-4">
+                                    <span class="quote d-flex align-items-center justify-content-center">
+                                  <i class="icon-quote-left"></i>
+                                </span>
+                                <p>Mutuelle des Employes des Ecoles Méthodistes.</p>
+                                <p class="name font-weight-bold">MEEM-CI</p>
+                                <span class="position text-danger font-italic">Ils nous ont fait confiance!</span>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="item">
+                            <div class="testimony-wrap d-flex">
+                              <div class="user-img" style="background-image: url(img/testyimg/maabs.png)">
+                              </div>
+                              <div class="text pl-4">
+                                    <span class="quote d-flex align-items-center justify-content-center">
+                                  <i class="icon-quote-left"></i>
+                                </span>
+                                <p>Mutuelle Sociale des agents de MaabSanté.</p>
+                                <p class="name text font-weight-bold">MAABSanté</p>
+                                <span class="position text-danger font-italic">Ils nous ont fait confiance!</span>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="item">
+                            <div class="testimony-wrap d-flex">
+                              <div class="user-img" style="background-image: url(img/testyimg/musarti.png)">
+                              </div>
+                              <div class="text pl-4">
+                                    <span class="quote d-flex align-items-center justify-content-center">
+                                  <i class="icon-quote-left"></i>
+                                </span>
+                                <p>Mutuelle Sociale des Agents de la RTI.</p>
+                                <p class="name font-weight-bold">MUSARTI</p>
+                                <span class="position text-danger font-italic">Ils nous ont fait confiance!</span>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="item">
+                            <div class="testimony-wrap d-flex">
+                              <div class="user-img" style="background-image: url(img/testyimg/mupartci.png)">
+                              </div>
+                              <div class="text pl-4">
+                                    <span class="quote d-flex align-items-center justify-content-center">
+                                  <i class="icon-quote-left"></i>
+                                </span>
+                                <p>Mutuelle du Personnel de l'ARTCI.</p>
+                                <p class="name font-weight-bold">MUPARTCI</p>
+                                <span class="position text-danger font-italic">Ils nous ont fait confiance!</span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+    </section>  <!----section clients et partenaires---->
+

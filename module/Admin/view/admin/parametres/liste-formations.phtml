@@ -1,0 +1,103 @@
+<?php
+$this->headTitle('Utilisateurs');
+
+$this->mainMenu()->setActiveItemId('users');
+$this->mainMenu()->setDataTableAssets(true);
+$this->pageBreadcrumbs()->setItems([
+            'Home'=>$this->url('home'),
+            'Manage Users'=>$this->url('users'),
+            ]);
+?>
+    
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box d-flex align-items-center justify-content-between">
+                <h4 class="mb-0 font-size-18">Liste des formations</h4>
+
+                <div class="page-title-right">
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item"><a href="<?= $this->url('admin'); ?>">Accueil</a></li>
+                        <li class="breadcrumb-item active">Formations</li>
+                    </ol>
+                </div>
+
+            </div>
+        </div>
+    </div>   
+    <div class="row">
+        <div class="col-12">
+                <?= $this->flashMessenger()->render('error', ['alert', 'alert-danger alert-dismissible fade show']); ?>
+                <?= $this->flashMessenger()->render('success', ['alert', 'alert-success alert-dismissible fade show']); ?>
+                <?= $this->flashMessenger()->render('info', ['alert', 'alert-info alert-dismissible fade show']); ?>
+        </div>
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header"> 
+                    <a class="btn btn-sm btn-primary float-right" href="<?= $this->url('admin', ['action'=>'ajouter-formation']); ?>">
+                      Ajouter une nouvelle formation
+                    </a> 
+                </div>
+                <div class="card-body">
+
+                    <table id="formation-datatable" width='100%' class="table dt-responsive nowrap">
+                        <thead>
+                            <tr>
+                                <th>Intitulé de la formation</th>
+                                <th>Date de début</th>
+                                <th>Date de fin</th>
+                                <th>lieu</th>
+                                <th>date de création</th>
+                                <th>type de formation</th>
+                                <th colspan="4"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($this->formations as $laFormation): 
+                              $formation = $laFormation['formation'];
+                              $type = $laFormation['type'];
+                            ?>
+                            <tr>
+                                <td>
+                                    <?= $formation->getLibelle();?>
+                                </td>
+                                <td>
+                                    <?= $formation->getDateDebut();?>
+                                </td>
+                                <td>
+                                    <?= $formation->getDateFin();?>
+                                </td>
+                                <td>
+                                    <?= $formation->getLieu();?>
+                                </td>
+                                <td>
+                                    <nobr><?= $formation->getDateCreation();?></nobr>
+                                </td>
+                                <td>
+                                    <?= $type->getLibelle();?>
+                                </td>
+
+                                <td colspan="1">
+                                    <a class="btn btn-sm btn-warning" href="<?= $this->url('admin', ['action'=>'voir-formation', 'id'=>$formation->getFormationId()]); ?>">
+                                        Détails
+                                    </a>
+                                </td>
+                                <td colspan="1">
+                                    <a class="btn btn-sm btn-success" href="<?= $this->url('admin', ['action'=>'editer-formation', 'id'=>$formation->getFormationId()]); ?>">
+                                      Editer
+                                    </a>
+                                </td>
+                                <td colspan="1">
+                                    <a class="btn btn-sm btn-danger" href="<?= $this->url('admin', ['action'=>'supprimer-formation', 'id'=>$formation->getFormationId()]); ?>">
+                                      Supprimer
+                                    </a>
+                                </td>
+                            </tr>
+                            <?php endforeach; ?> 
+                        </tbody>
+                    </table>
+
+                </div> <!-- end card body-->
+            </div> <!-- end card -->
+        </div><!-- end col-->
+    </div>
+    <!-- end row-->

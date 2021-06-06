@@ -1,0 +1,77 @@
+<?php
+$this->headTitle('Edition des permissions d\'un rôle');
+
+$this->mainMenu()->setActiveItemId('roles');
+
+$this->pageBreadcrumbs()->setItems([
+            'Home'=>$this->url('home'),
+            'Manage Roles'=>$this->url('roles'),
+            'Edit Role'=>$this->url('roles', ['action'=>'edit', 'id'=>$role->getId()])
+            ]);
+
+$form->get('submit')
+        ->setAttributes(['class'=>'btn btn-outline-success btn-rounded waves-effect waves-light'])
+        ->setValue('Enregistrer');
+
+$form->prepare();
+?>
+
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box d-flex align-items-center justify-content-between">
+            <h4 class="mb-0 font-size-18">Modification des permissions d'un rôle</h4>
+
+            <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+                    <li class="breadcrumb-item"><a href="javascript: void(0);">Pages</a></li>
+                    <li class="breadcrumb-item active">Datatables</li>
+                </ol>
+            </div>
+
+        </div>
+    </div>
+</div> 
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title" style="color:#FF9800"><?= $this->escapeHtml($role->getName()) ?></h4>
+                <?= $this->form()->openTag($form); ?>
+                <table style="margin-bottom: 15px;" class="table table-bordered">
+                    <tbody>
+                        <?php foreach ($allPermissions as $permission):
+                            $element = $form->get('permissions')->get($permission->getName());
+                        ?>
+                        <tr>
+                            <td>
+                                <div class="toggle-select-act fm-cmp-mg">
+                                    <div class="nk-toggle-switch">
+                                        <label for="ts1" class="ts-label"><?= $this->escapeHtml($element->getLabel()) ?></label>
+                                        <input id="ts1" type="checkbox" name="<?= $this->escapeHtmlAttr($element->getName()) ?>" 
+                                            value="<?= $this->escapeHtmlAttr($element->getCheckedValue()) ?>"
+                                            <?php if ($element->isChecked()) echo 'checked'?>
+                                            <?php if ($element->getAttribute('disabled')) echo 'disabled'?>>
+                                            <label for="ts1" class="ts-helper"></label>
+                                            <?= $this->formElementErrors($element); ?>
+                                    </div>
+                                </div>   
+                            </td>
+                            <td>
+                                <?= $this->escapeHtml($permission->getDescription()) ?>
+                            </td>
+                        </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+                <?= $this->formElement($form->get('csrf')); ?>
+
+                <?= $this->formElement($form->get('submit')); ?>
+
+                <?= $this->form()->closeTag(); ?>
+
+            </div> <!-- end card body-->
+        </div> <!-- end card -->
+    </div><!-- end col-->
+</div>
+<!-- end row-->

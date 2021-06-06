@@ -1,0 +1,64 @@
+<?php
+$this->headTitle('View User');
+
+$this->mainMenu()->setActiveItemId('users');
+
+$this->pageBreadcrumbs()->setItems([
+            'Home'=>$this->url('home'),
+            'Manage Users'=>$this->url('users'),
+            'View User'=>$this->url('users', ['action'=>'view', 'id'=>$user->getUserId()])
+            ]);
+?>
+
+<?= $this->flashMessenger()->render('error', ['alert', 'alert-warning']); ?>
+<?= $this->flashMessenger()->render('success', ['alert', 'alert-success']); ?>
+<?= $this->flashMessenger()->render('info', ['alert', 'alert-info']); ?>
+
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box d-flex align-items-center justify-content-between">
+            <h4 class="mb-0 font-size-18">Détails de l'utilisateur</h4>
+
+            <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+                    <li class="breadcrumb-item"><a href="javascript: void(0);">Pages</a></li>
+                    <li class="breadcrumb-item active">Datatables</li>
+                </ol>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+
+                <table id="user-datatable" width='100%' class="table dt-responsive nowrap">
+                    <tbody>
+                        <tr>
+                            <th style="text-align: center">E-mail:</th>
+                            <td style="text-align: center"><?= $this->escapeHtml($user->getEmail()) ?></td>
+                        </tr>
+                        <tr>
+                            <th style="text-align: center">Full Name:</th>
+                            <td style="text-align: center">
+                                <?= $user->getNom() .' '.$user->getPrenoms()?>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th style="text-align: center">Status:</th>
+                            <td style="text-align: center"><?= $this->escapeHtml($user->getStatusAsString()) ?></td>
+                        </tr>
+                        <tr>
+                            <th style="text-align: center">Roles:</th>
+                            <td style="text-align: center"><?= $this->escapeHtml($user->getRolesAsString()) ?></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div> <!-- end card body-->
+        </div> <!-- end card -->
+    </div><!-- end col-->
+</div>
+<!-- end row-->

@@ -1,0 +1,112 @@
+<?php
+$this->headTitle('View Role');
+
+$this->mainMenu()->setActiveItemId('roles');
+
+$this->pageBreadcrumbs()->setItems([
+            'Home'=>$this->url('home'),
+            'Manage Roles'=>$this->url('roles'),
+            'View Role ' . $role->getName() => $this->url('roles', ['action'=>'view', 'id'=>$role->getId()])
+            ]);
+?>
+
+<?= $this->flashMessenger()->render('error', ['alert', 'alert-warning']); ?>
+<?= $this->flashMessenger()->render('success', ['alert', 'alert-success']); ?>
+<?= $this->flashMessenger()->render('info', ['alert', 'alert-info']); ?>
+
+<link rel="stylesheet" href="<?php echo $this->basePath().'/assets/css/jquery.dataTables.min.css"';?>">
+<link rel="stylesheet" href="<?php echo $this->basePath().'/assets/css/style.css"';?>">
+
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box d-flex align-items-center justify-content-between">
+            <h4 class="mb-0 font-size-18">Détails du rôle</h4>
+
+            <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+                    <li class="breadcrumb-item"><a href="javascript: void(0);">Pages</a></li>
+                    <li class="breadcrumb-item active">Datatables</li>
+                </ol>
+            </div>
+
+        </div>
+    </div>
+</div> 
+<div class="row">
+    <div class="col-lg-12"><div class="card" style="padding: 5px;"><h4 class="mb-0 font-size-18">Rôle "<?= $this->escapeHtml($role->getName()) ?>"</h4></div></div>
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title" style="color:#FF9800"><i class="feather-users"> </i>Détails Généraux</h4>
+                Dans cette partie, vous pouvez afficher la liste de tous vos types d'absence
+                <table style="text-align:center;" class="table table-bordered">
+                    <tbody>
+                        <tr>
+                            <th style="text-align: center">Nom:</th>
+                            <td style="text-align: center"><?= $this->escapeHtml($role->getName()) ?></td>
+                        </tr>
+                        <tr>
+                            <th style="text-align: center">Description:</th>
+                            <td style="text-align: center"><?= $this->escapeHtml($role->getDescription()) ?></td>
+                        </tr>
+                        <tr>
+                            <th style="text-align: center">Date de Création:</th>
+                            <td style="text-align: center"><?= $this->escapeHtml($role->getDateCreated()) ?></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="row align-items-left">
+                    <div class="col-4 m-0" >
+                    </div>
+                    <div class="col-4 m-0" >
+                        <a href="<?= $this->url('roles', ['action'=>'modifier', 'id'=>$role->getId()]); ?>"
+                            class="btn btn-outline-success mt-3 btn-rounded waves-effect waves-light">
+                            <i class="feather-edit"> Modifier</i>
+                        </a>
+                    </div>
+                    <div class="col-4 m-0" >
+                    </div>
+                </div> <!-- end row -->
+            </div> <!-- end card-body-->
+        </div> <!-- end card-->
+    </div> <!-- end col-->
+
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title" style="color:#FF9800"><i class="feather-plus-square"> </i>Permissions du rôle</h4>
+                Dans cette partie, vous pouvez afficher la liste de tous vos types d'absence
+                <table style="text-align:center;" class="table table-bordered">
+                    <tbody>
+                        <?php foreach($allPermissions as $permission): ?>
+                            <tr>
+                                <td>
+                                    <input type="checkbox" disabled <?php if (isset($effectivePermissions[$permission->getName()])) echo 'checked'; ?>>
+                                    <?= $this->escapeHtml($permission->getName()) ?>
+                                    <?php if (isset($effectivePermissions[$permission->getName()]) && $effectivePermissions[$permission->getName()]=='inherited'): ?>
+                                    <em>(inherited)</em>
+                                    <?php endif; ?>
+                                </td>
+                                <td><?= $this->escapeHtml($permission->getDescription()) ?></td>
+                            </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+                <div class="row align-items-left">
+                    <div class="col-4 m-0" >
+                    </div>
+                    <div class="col-4 m-0" >
+                        <a href="<?= $this->url('roles', ['action'=>'editer-permissions', 'id'=>$role->getId()]); ?>"
+                            class="btn btn-outline-success mt-3 btn-rounded waves-effect waves-light">
+                            <i class="feather-edit"> Modifier</i>
+                        </a>
+                    </div>
+                    <div class="col-4 m-0" >
+                    </div>
+                </div> <!-- end row -->
+            </div> <!-- end card-body-->
+        </div> <!-- end card-->
+    </div> <!-- end col-->
+
+</div>
+<!-- end row-->

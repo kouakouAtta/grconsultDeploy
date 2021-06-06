@@ -1,0 +1,36 @@
+<?php
+    $flash = $this->flashMessenger();
+    $iconFlash = $flash->hasMessages('Error') ? '<i class="fa fa-warning"></i>&nbsp;' : '<i class="fa fa-info-circle"></i>&nbsp;';
+    $flash->setMessageOpenFormat('<div%s>
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
+            &times;
+        </button>
+        <ul><li>'.$iconFlash.'')
+        ->setMessageSeparatorString('</li><li>')
+        ->setMessageCloseString('</li></ul></div>');
+        //var_dump($flash->hasCurrentMessages());
+    
+    if($flash->hasCurrentSuccessMessages() || $flash->hasCurrentInfoMessages() || $flash->hasCurrentWarningMessages() || $flash->hasCurrentErrorMessages()){
+        echo $flash->renderCurrent('default', ['alert', 'alert-dismissible', 'alert-warning']);
+        echo $flash->renderCurrent('error',   ['alert', 'alert-dismissible', 'alert-danger']);
+        echo $flash->renderCurrent('info',    ['alert', 'alert-dismissible', 'alert-info']);
+        echo $flash->renderCurrent('warning', ['alert', 'alert-dismissible', 'alert-warning']);
+        echo $flash->renderCurrent('success', ['alert', 'alert-dismissible', 'alert-success']);
+        if($this->isFlashCurrent){
+            $flash->getPluginFlashMessenger()->clearCurrentMessagesFromContainer();
+        }
+        
+        
+    }elseif($flash->hasSuccessMessages() || $flash->hasInfoMessages() || $flash->hasWarningMessages() || $flash->hasErrorMessages()){
+        echo $flash->render('default', ['alert', 'alert-dismissible', 'alert-warning']);
+        echo $flash->render('error',   array('alert', 'alert-dismissible', 'alert-danger'));
+        echo $flash->render('info',    array('alert', 'alert-dismissible', 'alert-info'));
+        echo $flash->render('warning', array('alert', 'alert-dismissible', 'alert-warning'));
+        echo $flash->render('success', array('alert', 'alert-dismissible', 'alert-success'));
+        $flash->getPluginFlashMessenger()->clearMessagesFromContainer();
+    }
+    
+    
+    
+    
+    

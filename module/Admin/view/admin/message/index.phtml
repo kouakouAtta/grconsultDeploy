@@ -1,0 +1,97 @@
+<?php
+$this->headTitle('Utilisateurs');
+
+$this->mainMenu()->setActiveItemId('users');
+$this->mainMenu()->setDataTableAssets(true);
+$this->pageBreadcrumbs()->setItems([
+            'Home'=>$this->url('home'),
+            'Manage Users'=>$this->url('users'),
+            ]);
+?>
+    
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box d-flex align-items-center justify-content-between">
+                <h4 class="mb-0 font-size-18">liste des messages</h4>
+
+                <div class="page-title-right">
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item"><a href="<?= $this->url('admin'); ?>">Accueil</a></li>
+                        <li class="breadcrumb-item active">Messages</li>
+                    </ol>
+                </div>
+
+            </div>
+        </div>
+    </div>   
+    <div class="row">
+        <div class="col-12">
+                <?= $this->flashMessenger()->render('error', ['alert', 'alert-danger alert-dismissible fade show']); ?>
+                <?= $this->flashMessenger()->render('success', ['alert', 'alert-success alert-dismissible fade show']); ?>
+                <?= $this->flashMessenger()->render('info', ['alert', 'alert-info alert-dismissible fade show']); ?>
+        </div>
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header"> 
+                    <!--a class="btn btn-sm btn-primary float-right" href="< ?= $this->url('msgs', ['action'=>'ajouter-msg']); ?>">
+                      Ajouter un message
+                    </a--> 
+                </div>
+                <div class="card-body">
+
+                    <table id="msg-datatable" width='100%' class="table dt-responsive nowrap">
+                        <thead>
+                            <tr>
+                                <th>Envoyé par</th>
+                                <th>Email</th>
+                                <th>Objet du message</th>
+                                <th>Message</th>
+                                <th>Date de réception</th>
+                                <th colspan="3"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($this->msgs as $msg): 
+                              
+                            ?>
+                            <tr>
+                                <td>
+                                    <?= $msg->getNomUser();?>
+                                </td>
+                                <td>
+                                    <?= $msg->getEmailUser();?>
+                                </td>
+                                <td>
+                                    <?= $msg->getSujet();?>
+                                </td>
+                                <td>
+                                    <?= $msg->getMessage();?>
+                                </td>
+                                <td>
+                                    <?= $msg->getDateCreation();?>
+                                </td>
+                                <td colspan="1">
+                                    <a class="btn btn-sm btn-warning" href="<?= $this->url('messages', ['action'=>'voir-message', 'id'=>$msg->getContactFormId()]); ?>">
+                                      Voir
+                                    </a>
+                                </td>
+                                <td colspan="1">
+                                    <a class="btn btn-sm btn-success" href="<?= $this->url('messages', ['action'=>'repondre-message', 'id'=>$msg->getContactFormId()]); ?>">
+                                      Répondre
+                                    </a>
+                                </td>
+                                <td colspan="1">
+                                    <a class="btn btn-sm btn-danger" href="<?= $this->url('messages', ['action'=>'supprimer-message', 'id'=>$msg->getContactFormId()]); ?>">
+                                      supprimer
+                                    </a>
+                                </td>
+                            </tr>
+                            <?php endforeach; ?> 
+                        </tbody>
+                    </table>
+
+                </div> <!-- end card body-->
+            </div> <!-- end card -->
+        </div><!-- end col-->
+    </div>
+    <!-- end row-->

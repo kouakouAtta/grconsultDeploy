@@ -1,0 +1,112 @@
+<?php
+$this->headTitle('Modifier Utilisateur');
+
+$this->mainMenu()->setActiveItemId('users');
+
+$this->pageBreadcrumbs()->setItems([
+            'Home'=>$this->url('home'),
+            'Manage Users'=>$this->url('users'),
+            'Edit User'=>$this->url('users', ['action'=>'edit', 'id'=>$user->getUserId()])
+            ]);
+
+$form->get('email')->setAttributes([
+    'class'=>'form-control', 
+    'placeholder'=>'kouakouw.kouakou@gmail.com'
+    ]);
+
+$form->get('full_name')->setAttributes([
+    'class'=>'form-control', 
+    'placeholder'=>'Atta Kouakou Abraham'
+    ]);
+
+$form->get('status')->setAttributes([
+    'class'=>'form-control'
+    ]);
+
+$form->get('roles')->setAttributes([
+    'class'=>'form-control'
+    ]);
+
+$form->get('submit')
+        ->setAttributes(['class'=>'btn btn-primary',
+            'style'=>'background-color: #1bbc9b;color:white;'])
+        ->setValue('Modifier');
+
+$form->prepare();
+?>
+<div class="ts-page-title">
+
+    <div class="custom" style="background-image: url(<?php echo $this->basePath().'/ressources/img/banner/banner1.jpg';?>)">
+        <h6>MODIFICATION D'UTILISATEUR</h6>
+    </div>
+
+</div>
+<div id="t3-mainbody" class="container t3-mainbody">
+	<div class="row">
+            <!-- MAIN CONTENT -->
+            <div id="t3-content" class="t3-content col-xs-12">
+		<div id="system-message-container">
+                </div>
+                
+		<div class="contact" itemscope itemtype="http://schema.org/Person">
+                    <dl class="contact-address dl-horizontal" itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
+	
+                    </dl>
+		
+                    <span></span> <h3><?= $this->escapeHtml($user->getEmail()) ?> !</h3>
+                    <div id="contact-form" class="contact-form">
+                        <?= $this->form()->openTag($form); ?>
+                            <fieldset>
+                                <legend>Modifier un utilisateur. Tous les champs avec un asterisk (*) sont obligatoires.</legend>
+                                <div class="row">
+                                    <div class="col-md-4">
+					<div class="control-group">
+                                            <label class="hasPopover required">
+                                               <?= $this->formLabel($form->get('email')); ?><span class="star">&#160;*</span>
+                                            </label>
+                                            <?= $this->formElement($form->get('email')); ?>
+                                            <?= $this->formElementErrors($form->get('email')); ?>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+					<div class="control-group">
+                                            <label class="hasPopover required">
+                                               <?= $this->formLabel($form->get('full_name')); ?><span class="star">&#160;*</span>
+                                            </label>
+                                            <?= $this->formElement($form->get('full_name')); ?>
+                                            <?= $this->formElementErrors($form->get('full_name')); ?>					
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+					<div class="control-group">
+                                            <label class="hasPopover required">
+                                               <?= $this->formLabel($form->get('status')); ?><span class="star">&#160;*</span>
+                                            </label>
+                                            <?= $this->formElement($form->get('status')); ?>
+                                            <?= $this->formElementErrors($form->get('status')); ?>					
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+					<div class="control-group">
+                                            <label class="hasPopover required">
+                                               <?= $this->formLabel($form->get('roles')); ?><span class="star">&#160;*</span>
+                                            </label>
+                                            <?= $this->formElement($form->get('roles')); ?>
+                                            <?= $this->formElementErrors($form->get('roles')); ?>
+                                        </div>
+                                    </div>
+                                </div>
+				<?= $this->formElement($form->get('csrf')); ?>
+                                <?= $this->formElementErrors($form->get('csrf')); ?>
+                                <?= $this->formElement($form->get('submit')); ?>
+                            </fieldset>
+                        <?= $this->form()->closeTag(); ?>
+                    </div>
+		</div>
+            </div>
+		<!-- //MAIN CONTENT -->
+	</div>
+</div>
+

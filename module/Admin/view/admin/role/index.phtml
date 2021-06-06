@@ -1,0 +1,104 @@
+<?php
+$this->headTitle('Roles');
+
+$this->mainMenu()->setActiveItemId('roles');
+$this->mainMenu()->setDataTableAssets(true);
+$this->pageBreadcrumbs()->setItems([
+            'Home'=>$this->url('home'),
+            'Manage Roles'=>$this->url('roles'),
+            ]);
+?>
+
+<?= $this->flashMessenger()->render('error', ['alert', 'alert-warning']); ?>
+<?= $this->flashMessenger()->render('success', ['alert', 'alert-success']); ?>
+<?= $this->flashMessenger()->render('info', ['alert', 'alert-info']); ?>
+
+<style>
+    .float{
+        position:fixed;
+	width:60px;
+	height:60px;
+	bottom:60px;
+	right:40px;
+        z-index: 10;
+	background-color:orange;
+	color:#FFF;
+	border-radius:50px;
+	text-align:center;
+	box-shadow: 2px 2px 3px #999;
+}
+
+    .my-float{
+        margin-top:25px;
+    }
+</style>
+<a href="<?= $this->url('roles', ['action'=>'ajouter']); ?>" class="float">
+<i class="fa fa-plus my-float"></i>
+</a>
+<p></p>
+
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box d-flex align-items-center justify-content-between">
+            <h4 class="mb-0 font-size-18">Liste des rôles</h4>
+
+            <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+                    <li class="breadcrumb-item"><a href="javascript: void(0);">Pages</a></li>
+                    <li class="breadcrumb-item active">Datatables</li>
+                </ol>
+            </div>
+
+        </div>
+    </div>
+</div>   
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+
+                <table id="role-datatable" width='100%' class="table dt-responsive nowrap">
+                    <thead>
+                        <tr>
+                            <th>Désignation</th>
+                            <th>Description</th>
+                            <th>Date de Création</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($roles as $role): ?>
+                        <tr>
+                            <td>
+                                <a class="btn-outline-warning" href="<?= $this->url('roles', ['action'=>'voir-details', 'id'=>$role->getId()]); ?>">
+                                    <?= $this->escapeHtml($role->getName()); ?>
+                                </a> 
+                            </td>
+                            <td><?= $this->escapeHtml($role->getDescription()); ?></a> 
+                            </td>
+                            <td><nobr><?= $this->escapeHtml($role->getDateCreated()); ?></nobr></td>  
+                            <td>
+                                    <a title="Modifier" data-placement="top" data-toggle="tooltip"  href="<?= $this->url('roles', 
+                                        ['action'=>'modifier', 'id'=>$role->getId()]); ?>"
+                                        class='btn btn-outline-warning btn-rounded waves-effect waves-light'>
+                                        <i class='feather-edit'></i>
+                                    </a>                            
+                                    <a title="Supprimer" data-placement="top" data-toggle="tooltip"  href="<?= $this->url('roles', 
+                                        ['action'=>'supprimer', 'id'=>$role->getId()]); ?>"
+                                        class='btn btn-outline-danger btn-rounded waves-effect waves-light'>
+                                        <i class='feather-trash'></i>
+                                    </a>                 
+                            </td>
+                        </tr>
+                        <?php endforeach; ?> 
+                    </tbody>
+                </table>
+
+            </div> <!-- end card body-->
+        </div> <!-- end card -->
+    </div><!-- end col-->
+</div>
+<!-- end row-->
+
+
+

@@ -1,0 +1,84 @@
+<?php
+$this->headTitle('Utilisateurs');
+
+$this->mainMenu()->setActiveItemId('users');
+$this->mainMenu()->setDataTableAssets(true);
+$this->pageBreadcrumbs()->setItems([
+            'Home'=>$this->url('home'),
+            'Manage Users'=>$this->url('users'),
+            ]);
+?>
+    
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box d-flex align-items-center justify-content-between">
+                <h4 class="mb-0 font-size-18">Clients / Partenaires</h4>
+
+                <div class="page-title-right">
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item"><a href="<?= $this->url('admin'); ?>">Accueil</a></li>
+                        <li class="breadcrumb-item active">Clients / Partenaires</li>
+                    </ol>
+                </div>
+
+            </div>
+        </div>
+    </div>   
+    <div class="row">
+        <div class="col-12">
+                <?= $this->flashMessenger()->render('error', ['alert', 'alert-danger alert-dismissible fade show']); ?>
+                <?= $this->flashMessenger()->render('success', ['alert', 'alert-success alert-dismissible fade show']); ?>
+                <?= $this->flashMessenger()->render('info', ['alert', 'alert-info alert-dismissible fade show']); ?>
+        </div>
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header"> 
+                    <a class="btn btn-sm btn-primary float-right" href="<?= $this->url('clients', ['action'=>'ajouter-client']); ?>">
+                      Ajouter un client / partenaire
+                    </a> 
+                </div>
+                <div class="card-body">
+
+                    <table id="client-datatable" width='100%' class="table dt-responsive nowrap">
+                        <thead>
+                            <tr>
+                                <th>image</th>
+                                <th>Nom du client / partenaire</th>
+                                <th>Abregé du client / partenaire</th>
+                                <th colspan="2"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($this->clients as $client): 
+                              
+                            ?>
+                            <tr>
+                                <td>
+                                    <?= $client->getImage();?>
+                                </td>
+                                <td>
+                                    <?= $client->getNom();?>
+                                </td>
+                                <td>
+                                    <?= $client->getAbrege();?>
+                                </td>
+                                <td colspan="1">
+                                    <a class="btn btn-sm btn-success" href="<?= $this->url('clients', ['action'=>'editer-client', 'id'=>$client->getClientsEtPartenairesId()]); ?>">
+                                      Editer
+                                    </a>
+                                </td>
+                                <td colspan="1">
+                                    <a class="btn btn-sm btn-danger" href="<?= $this->url('clients', ['action'=>'supprimer-client', 'id'=>$client->getClientsEtPartenairesId()]); ?>">
+                                      Supprimer
+                                    </a>
+                                </td>
+                            </tr>
+                            <?php endforeach; ?> 
+                        </tbody>
+                    </table>
+
+                </div> <!-- end card body-->
+            </div> <!-- end card -->
+        </div><!-- end col-->
+    </div>
+    <!-- end row-->

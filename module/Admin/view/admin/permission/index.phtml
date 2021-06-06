@@ -1,0 +1,99 @@
+<?php
+$this->headTitle('Permissions');
+
+$this->mainMenu()->setActiveItemId('admin');
+$this->mainMenu()->setDataTableAssets(true);
+
+$this->pageBreadcrumbs()->setItems([
+            'Home'=>$this->url('home'),
+            'Manage Permissions'=>$this->url('permissions'),
+            ]);
+?>
+
+<?= $this->flashMessenger()->render('error', ['alert', 'alert-warning']); ?>
+<?= $this->flashMessenger()->render('success', ['alert', 'alert-success']); ?>
+<?= $this->flashMessenger()->render('info', ['alert', 'alert-info']); ?>
+
+<link rel="stylesheet" href="<?php echo $this->basePath().'/assets/css/jquery.dataTables.min.css"';?>">
+<link rel="stylesheet" href="<?php echo $this->basePath().'/assets/css/style.css"';?>">
+<style>
+    .float{
+        position:fixed;
+	width:60px;
+	height:60px;
+	bottom:60px;
+	right:40px;
+        z-index: 10;
+	background-color:orange;
+	color:#FFF;
+	border-radius:50px;
+	text-align:center;
+	box-shadow: 2px 2px 3px #999;
+}
+
+    .my-float{
+        margin-top:25px;
+    }
+</style>
+<a href="<?= $this->url('permissions', ['action'=>'ajouter']); ?>" class="float">
+<i class="fa fa-plus my-float"></i>
+</a>
+<p></p>
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box d-flex align-items-center justify-content-between">
+            <h4 class="mb-0 font-size-18">Liste des permissions</h4>
+
+            <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+                    <li class="breadcrumb-item"><a href="javascript: void(0);">Pages</a></li>
+                    <li class="breadcrumb-item active">Datatables</li>
+                </ol>
+            </div>
+
+        </div>
+    </div>
+</div>   
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+
+                <table id="permission-datatable" width='100%' class="table dt-responsive">
+                    <thead>
+                        <tr>
+                            <th width='7%'>Désignation</th>
+                            <th width='20%'>Description</th>
+                            <th width='7%'>Date de Création</th>
+                            <th width='5%'>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($permissions as $permission): ?>
+                        <tr>
+                            <td><?= $this->escapeHtml($permission->getName()); ?></td>
+                            <td><?= $this->escapeHtml($permission->getDescription()); ?>
+                            </td>
+                            <td><nobr><?= $this->escapeHtml($permission->getDateCreated()); ?></nobr></td>  
+                            <td>
+                                <a title="Modifier" data-placement="top" data-toggle="tooltip"  href="<?= $this->url('permissions', 
+                                    ['action'=>'modifier', 'id'=>$permission->getId()]); ?>"
+                                    class='btn btn-outline-warning btn-rounded waves-effect waves-light'>
+                                    <i class='feather-edit'></i>
+                                </a>                            
+                                <a title="Supprimer" data-placement="top" data-toggle="tooltip"  href="<?= $this->url('permissions', 
+                                    ['action'=>'supprimer', 'id'=>$permission->getId()]); ?>"
+                                    class='btn btn-outline-danger btn-rounded waves-effect waves-light'>
+                                    <i class='feather-trash'></i>
+                                </a>                 
+                            </td>
+                        </tr>
+                        <?php endforeach; ?> 
+                    </tbody>
+                </table>
+
+            </div> <!-- end card body-->
+        </div> <!-- end card -->
+    </div><!-- end col-->
+</div>
+<!-- end row-->

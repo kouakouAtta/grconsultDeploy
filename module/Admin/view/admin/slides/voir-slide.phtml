@@ -1,0 +1,84 @@
+<?php
+$this->headTitle('Utilisateurs');
+
+$this->mainMenu()->setActiveItemId('users');
+$this->mainMenu()->setDataTableAssets(true);
+$this->pageBreadcrumbs()->setItems([
+            'Home'=>$this->url('home'),
+            'Manage Users'=>$this->url('users'),
+            ]);
+?>
+    
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box d-flex align-items-center justify-content-between">
+                <h4 class="mb-0 font-size-18">Détails de la formation</h4>
+
+                <div class="page-title-right">
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item"><a href="javascript: void(0);">Liste des formations</a></li>
+                        <li class="breadcrumb-item active">Details</li>
+                    </ol>
+                </div>
+
+            </div>
+        </div>
+    </div>   
+    <div class="row">
+        <div class="col-12">
+                <?= $this->flashMessenger()->render('error', ['alert', 'alert-danger alert-dismissible fade show']); ?>
+                <?= $this->flashMessenger()->render('success', ['alert', 'alert-success alert-dismissible fade show']); ?>
+                <?= $this->flashMessenger()->render('info', ['alert', 'alert-info alert-dismissible fade show']); ?>
+        </div>
+        <div class="col-12">
+            <div class="card">
+                <!--div class="card-header"> 
+                    <a class="btn btn-sm btn-primary float-right" href="< ?= $this->url('admin', ['action'=>'ajouter-formation']); ?>">
+                      Ajouter une nouvelle formation
+                    </a> 
+                </div-->
+                <div class="card-body">
+
+                    <table id="formation-datatable" width='100%' class="table dt-responsive nowrap">
+                        <thead class="bg-secondary text-white">
+                            <tr>
+                                <th>Image</th>
+                                <th>Titre</th>
+                                <th>Libelle</th>
+                                <th>Libelle du bouton </th>
+                                <th>Url du bouton </th>
+                                <th>Date de création</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-light">
+                            
+                            <tr>
+                                <td>
+                                <div class="img-thumbnail">
+                                        <div class="one-fifth first about_img"><img width="400" height="400"src="<?=$this->basePath('data/documents/slides/'.$slide->getImage())?>"/></div> 
+                                    </div>
+                                </td>
+                                <td>
+                                    <?= $slide->getTitre();?>
+                                </td>
+                                <td>
+                                    <?= $slide->getLibelle();?>
+                                </td>
+                                <td>
+                                    <?= $slide->getLibelleBtnService();?>
+                                </td>
+                                <td>
+                                    <?= $slide->getUrlBtnService();?>
+                                </td>
+                                <td>
+                                    <?= $slide->getDateCreation();?>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div> <!-- end card body-->
+            </div> <!-- end card -->
+        </div><!-- end col-->
+    </div>
+    <!-- end row-->

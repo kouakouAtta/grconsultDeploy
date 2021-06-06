@@ -1,0 +1,150 @@
+<?php
+$this->headTitle('Ajouter une formation');
+
+$this->mainMenu()->setActiveItemId('formation');
+
+$this->pageBreadcrumbs()->setItems([
+            'Accueil'=>$this->url('admin')
+            ]);
+////var_dump($form);die();
+ $form->get('libelle')->setAttributes([
+    'class'=>'form-control', 
+    
+    ]);
+ 
+ $form->get('dateDebut')->setAttributes([
+    'class'=>'form-control',
+    
+    ]);
+ 
+ $form->get('dateFin')->setAttributes([
+    'class'=>'form-control', 
+    
+    ]);
+ 
+ $form->get('lieu')->setAttributes([
+    'class'=>'form-control',
+    ]);
+ 
+ $form->get('typeFormationId')->setAttributes([
+    'class'=>'form-control',
+    'data-toggle'=>'select2', 
+    ]);
+ 
+ $form->get('enregistrer')->setAttributes([
+    'class'=>'btn btn-sm btn-success waves-effect waves-light float-right',
+    ]);
+ $form->get('annuler')->setAttributes([
+    'class'=>'btn btn-sm btn-danger waves-effect waves-light float-left',
+    ]);
+ 
+ 
+$form->prepare();
+
+?>
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box d-flex align-items-center justify-content-between">
+            <h4 class="mb-0 font-size-18">Ajout d'une formation </h4>
+
+            <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+                    <li class="breadcrumb-item"><a href="javascript: void(0);">Formation</a></li>
+                    <li class="breadcrumb-item active">Formation</li>
+                </ol>
+            </div>
+
+        </div>
+    </div>
+    <div class="col-12">
+            <?= $this->flashMessenger()->render('error', ['alert', 'alert-danger alert-dismissible fade show']); ?>
+            <?= $this->flashMessenger()->render('success', ['alert', 'alert-success alert-dismissible fade show']); ?>
+            <?= $this->flashMessenger()->render('info', ['alert', 'alert-info alert-dismissible fade show']); ?>
+    </div>
+</div>  
+<div class="card">
+    <div class="card-body" style="padding-top: 50px; padding-bottom: 50px;">
+       
+        <?= $this->form()->openTag($form); ?>
+            <div class="row form-group">
+                    <div class="col-xl-3"></div>
+                    <div class="col-xl-2"><?= $this->formLabel($form->get('libelle')); ?></div>
+                    <div class="col-xl-4"><?= $this->formElement($form->get('libelle')); ?></div>
+                    <div class="col-xl-3">
+                        <div class="invalid-feedback">
+                            <?= $this->formElementErrors($form->get('libelle')); ?>
+                        </div>
+                          
+                    </div>
+            </div>
+        
+            <div class="row form-group">
+                <div class="col-xl-3"></div>
+                <div class="col-xl-2"><?= $this->formLabel($form->get('dateDebut')); ?></div>
+                <div class="col-xl-4"><?= $this->formElement($form->get('dateDebut')); ?></div>
+                <div class="col-xl-3">
+                    <div class="invalid-feedback">
+                        <?= $this->formElementErrors($form->get('dateDebut')); ?>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="row form-group">
+                <div class="col-xl-3"></div>
+                <div class="col-xl-2"><?= $this->formLabel($form->get('dateFin')); ?></div>
+                <div class="col-xl-4"><?= $this->formElement($form->get('dateFin')); ?></div>
+                <div class="col-xl-3">
+                  
+                    <!-- Modal -->
+                    
+                    <div class="invalid-feedback">
+                        <?= $this->formElementErrors($form->get('dateFin')); ?>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="row form-group">
+                <div class="col-xl-3"></div>
+                <div class="col-xl-2"><?= $this->formLabel($form->get('lieu')); ?></div>
+                <div class="col-xl-4"><?= $this->formElement($form->get('lieu')); ?></div>
+                <div class="col-xl-3">
+                    
+                    <!-- Modal -->
+                    
+                    <div class="invalid-feedback">
+                        <?= $this->formElementErrors($form->get('lieu')); ?>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="row form-group">
+                <div class="col-xl-3"></div>
+                <div class="col-xl-2"><?= $this->formLabel($form->get('typeFormationId')); ?></div>
+                <div class="col-xl-4"><?= $this->formElement($form->get('typeFormationId')); ?></div>
+                <div class="col-xl-3">
+                    
+                    <!-- Modal -->
+                    
+                    <div class="invalid-feedback">
+                        <?= $this->formElementErrors($form->get('typeFormationId')); ?>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-xl-3">
+                    
+                </div>
+                <div class="col-xl-6 bg-light">
+                    <?= $this->formElement($form->get('enregistrer')); ?>
+                    <?= $this->formElement($form->get('annuler')); ?>                    
+                </div>
+                <div class="col-xl-3">
+                    
+                </div>
+                
+            </div> 
+            <?= $this->form()->closeTag(); ?>
+    </div>
+    <!-- end card-body-->
+</div>

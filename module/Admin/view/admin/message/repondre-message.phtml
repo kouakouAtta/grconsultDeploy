@@ -1,0 +1,123 @@
+<?php
+$this->headTitle('Ajouter une formation');
+
+$this->mainMenu()->setActiveItemId('formation');
+
+$this->pageBreadcrumbs()->setItems([
+            'Accueil'=>$this->url('admin')
+            ]);
+////var_dump($form);die();
+ $form->get('nom')->setAttributes([
+    'class'=>'form-control', 
+    
+    ]);
+ $form->get('email')->setAttributes([
+    'class'=>'form-control', 
+    
+    ]);
+ $form->get('sujet')->setAttributes([
+    'class'=>'form-control', 
+    
+    ]);
+ $form->get('message')->setAttributes([
+    'class'=>'form-control', 
+    
+    ]);
+ 
+ $form->get('envoyer')->setAttributes([
+    'class'=>'btn btn-sm btn-success waves-effect waves-light float-right',
+    ]);
+ $form->get('annuler')->setAttributes([
+    'class'=>'btn btn-sm btn-danger waves-effect waves-light float-left',
+    ]);
+ 
+ 
+$form->prepare();
+
+?>
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box d-flex align-items-center justify-content-between">
+            <h4 class="mb-0 font-size-18">Répondre </h4>
+
+            <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+                    <li class="breadcrumb-item"><a href="javascript: void(0);">liste  des messages</a></li>
+                    <li class="breadcrumb-item active">Répondre</li>
+                </ol>
+            </div>
+
+        </div>
+    </div>
+    <div class="col-12">
+            <?= $this->flashMessenger()->render('error', ['alert', 'alert-danger alert-dismissible fade show']); ?>
+            <?= $this->flashMessenger()->render('success', ['alert', 'alert-success alert-dismissible fade show']); ?>
+            <?= $this->flashMessenger()->render('info', ['alert', 'alert-info alert-dismissible fade show']); ?>
+    </div>
+</div>  
+<div class="card">
+    <div class="card-body" style="padding-top: 50px; padding-bottom: 50px;">
+       
+        <?= $this->form()->openTag($form); ?>
+            <div class="row form-group">
+                    <div class="col-xl-3"></div>
+                    <div class="col-xl-2"><?= $this->formLabel($form->get('nom')); ?></div>
+                    <div class="col-xl-4"><?= $this->formElement($form->get('nom')); ?></div>
+                    <div class="col-xl-3">
+                        <div class="invalid-feedback">
+                            <?= $this->formElementErrors($form->get('nom')); ?>
+                        </div>
+                          
+                    </div>
+            </div>
+            <div class="row form-group">
+                    <div class="col-xl-3"></div>
+                    <div class="col-xl-2"><?= $this->formLabel($form->get('email')); ?></div>
+                    <div class="col-xl-4"><?= $this->formElement($form->get('email')); ?></div>
+                    <div class="col-xl-3">
+                        <div class="invalid-feedback">
+                            <?= $this->formElementErrors($form->get('email')); ?>
+                        </div>
+                          
+                    </div>
+            </div>
+            <div class="row form-group">
+                    <div class="col-xl-3"></div>
+                    <div class="col-xl-2"><?= $this->formLabel($form->get('sujet')); ?></div>
+                    <div class="col-xl-4"><?= $this->formElement($form->get('sujet')); ?></div>
+                    <div class="col-xl-3">
+                        <div class="invalid-feedback">
+                            <?= $this->formElementErrors($form->get('sujet')); ?>
+                        </div>
+                          
+                    </div>
+            </div>
+            <div class="row form-group">
+                    <div class="col-xl-3"></div>
+                    <div class="col-xl-2"><?= $this->formLabel($form->get('message')); ?></div>
+                    <div class="col-xl-4"><?= $this->formElement($form->get('message')); ?></div>
+                    <div class="col-xl-3">
+                        <div class="invalid-feedback">
+                            <?= $this->formElementErrors($form->get('message')); ?>
+                        </div>
+                          
+                    </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-xl-3">
+                    
+                </div>
+                <div class="col-xl-6 bg-light">
+                    <?= $this->formElement($form->get('envoyer')); ?>
+                    <?= $this->formElement($form->get('annuler')); ?>                    
+                </div>
+                <div class="col-xl-3">
+                    
+                </div>
+                
+            </div> 
+            <?= $this->form()->closeTag(); ?>
+    </div>
+    <!-- end card-body-->
+</div>

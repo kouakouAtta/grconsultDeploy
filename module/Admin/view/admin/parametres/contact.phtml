@@ -1,0 +1,99 @@
+<?php 
+  $this->HeadTitle('Nous contacter'); 
+  //var_dump($infosContacts);
+  //die();
+?>
+
+
+<section class="ftco-section contact-section">
+      <div class="container">
+
+      <?php foreach($infosContacts as $infosContact ){ ?>
+        <div class="row d-flex mb-5 contact-info justify-content-center">
+        	<div class="col-md-8">
+        		<div class="row mb-5">
+		          <div class="col-md-3 text-center py-4">
+		          	<div class="icon">
+		          		<span class="icon-map-o"></span>
+		          	</div>
+		            <p><span>Address:</span> <?=$infosContact['adresse']?></p>
+		          </div>
+		          <div class="col-md-3 text-center border-height py-4">
+		          	<div class="icon">
+		          		<span class="icon-mobile-phone"></span>
+		          	</div>
+                  <p><span>Phone:</span><?=$infosContact['Telephone']?></p>
+		          </div>
+              <div class="col-md-3 text-center border-height py-4">
+		          	<div class="icon">
+		          		<span class="icon-calendar"></span>
+		          	</div>
+                  <p><span>Heures d'ouvertures:</span><?=$infosContact['Horaires']?></a></p>
+		          </div>
+		          <div class="col-md-3 text-center py-4">
+		          	<div class="icon">
+		          		<span class="icon-envelope-o"></span>
+		          	</div>
+                  <p><span>Email:</span> <?=$infosContact['email']?></p>
+		          </div>
+		        </div>
+          </div>
+        </div>
+        <?php } ?>
+
+        <div class="row">
+        <div class="col-12">
+            <?= $this->flashMessenger()->render('error', ['alert', 'alert-danger alert-dismissible fade show']); ?>
+            <?= $this->flashMessenger()->render('success', ['alert', 'alert-success alert-dismissible fade show']); ?>
+            <?= $this->flashMessenger()->render('info', ['alert', 'alert-info alert-dismissible fade show']); ?>
+            </div>
+        </div>
+
+        <div class="row block-9 justify-content-center mb-5">
+          <div class="col-md-8 mb-md-5">
+          	<h2 class="text-center">Une question?<br>Besoin d'une info ? <br>Ecrivez-nous</h2>
+            <!--form action="#" class="bg-light p-5 contact-form"-->
+            <?= $this->form()->openTag($form); ?>
+              <div class="form-group">
+                  <!--input type="text" class="form-control" placeholder="Votre Nom" required=""-->
+                  <?= $this->formElement($form->get('nom')); ?> 
+                  <div class="col-sm-12 errors animated text-warning"><?= $this->formElementErrors($form->get('nom')); ?></div>
+              </div>
+              <div class="form-group">
+                  <!--input type="text" class="form-control" placeholder="Votre mail" required=""-->
+                  <?= $this->formElement($form->get('email')); ?> 
+                  <div class="col-sm-12 errors animated text-warning"><?= $this->formElementErrors($form->get('email')); ?></div>
+              </div>
+              <div class="form-group">
+                  <!--input type="text" class="form-control" placeholder="Sujet" required=""-->
+                  <?= $this->formElement($form->get('sujet')); ?> 
+                  <div class="col-sm-12 errors animated text-warning"><?= $this->formElementErrors($form->get('sujet')); ?></div>
+              </div>
+              <div class="form-group">
+                  <!--textarea name="" id="" cols="30" rows="7" class="form-control" placeholder="Message" required=""></textarea-->
+                  <?= $this->formElement($form->get('message')); ?>
+                  <div class="col-sm-12 errors animated text-warning"><?= $this->formElementErrors($form->get('message')); ?></div> 
+              </div>
+              <div class="form-group float-right">
+              <?= $this->formElement($form->get('envoyer')); ?> 
+                <!--input type="submit" value="Envoi de Message" class="btn btn-danger py-3 px-5"-->
+                <?php ?> 
+              </div>
+              <?= $this->form()->closeTag(); ?>
+            </form>
+          
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="ftco-section ftco-no-pb ftco-no-pt">
+    	<div class="container-fluid px-0">
+    		<div class="row justify-content-center">
+        	<div class="col-md-12">
+        	<div id="map" class="bg-white"></div>
+        	</div>
+            </div>
+    	</div>
+    </section>
+		

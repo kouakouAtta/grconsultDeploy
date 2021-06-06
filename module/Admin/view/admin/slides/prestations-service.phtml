@@ -1,0 +1,35 @@
+<?php $this->headTitle('prestations de service'); 
+
+//var_dump($prestationsServices);
+//die();
+?>
+    <!----section services---->	
+    <section class="ftco-section">
+			<div class="container">
+				
+				<div class="row no-gutters">
+					<table class="table table-bordered">
+
+						<thead>
+							<th> Libelle de la prestation </th>
+							<th> sections </th>
+							<th colspan="2"> Actions </th>
+						</thead>
+
+						<tbody>
+							<?php foreach($prestationsServices as $prestationsService){?>
+								<tr> 
+									<td><?=$prestationsService['libelle']?></td>
+									<td><a href="#">Voir les sections</a></td>
+									<td><a class="text-warning" href="">editer</a> </td>
+									<td><a class="text-danger" href="">suppimer</a> </td>
+								</tr>
+							<?php } ?>
+						</tbody>
+					</table>
+					
+				</div>
+			</div>
+	</section><!----end section service---->
+    
+     

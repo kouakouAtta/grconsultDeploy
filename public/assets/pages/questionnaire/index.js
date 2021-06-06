@@ -1,0 +1,67 @@
+/*
+ Template Name: Scoxe - Admin & Dashboard Template
+ Author: Myra Studio
+ File: Datatables
+*/
+
+
+$(document).ready(function(){$("#questionnaire-datatable").DataTable(
+{
+    iDisplayLength: 10,
+    sAjaxSource: basePath + '/ajaxelearning/questionnaires-proposes',
+    sServerMethod: 'post',
+    fnServerData: function ( sSource, aoData, fnCallback, oSettings ) {
+        oSettings.jqXHR = $.ajax({
+          "dataType": 'json',
+          "type": "POST",
+          "data": {
+                id : $('#connectedUser').val() 
+            },
+          "url": sSource,
+          "success": fnCallback
+    })},
+    
+    oLanguage: {sUrl: basePath + '/plugins/datatables/jquery.dataTables.fr.json'},
+
+    fnRowCallback: function(nRow, aData, iDisplayIndex){
+        $('td:eq(0)', nRow).html(aData[1]);
+        $('td:eq(1)', nRow).html(aData[2]);
+        $('td:eq(2)', nRow).html(aData[3]);
+        $('td:eq(3)', nRow).html(aData[4]+" "+aData[5]+" "+aData[6]);
+        $('td:eq(4)', nRow).html(getBadge(aData[7]));
+        $('td:eq(5)', nRow).html(aData[8]+" min");
+    }
+});});
+
+function getBadge(statut){
+    if(statut == '0'){
+        return '<span class="badge badge-soft-warning" style="font-size:12px;">Non activé</span>';
+    }
+    else if(statut == "1"){
+        return '<span class="badge badge-soft-success" style="font-size:12px;">Activé</span>';
+    }
+}
+
+function getBtn(id){
+    
+    var btnDelete = 
+            "        <a href='"+basePath+"/absence/voir-details/"+id+"' data-toggle='tooltip' data-placement='top' title='Voir les détails' " +
+            "            class='btn btn-outline-info btn-rounded waves-effect waves-light'> " +
+            "             <i class='feather-eye'></i> " +
+            "        </a> ";
+    
+    btnDelete += 
+            "        <a href='"+basePath+"/absence/modifier/"+id+"' data-toggle='tooltip' data-placement='top' title='Valider' " +
+            "            class='btn btn-outline-success btn-rounded waves-effect waves-light'> " +
+            "             <i class='feather-edit'></i> " +
+            "        </a> ";
+    
+    btnDelete += 
+            "        <a href='"+basePath+"/absence/supprimer/"+id+"' data-toggle='tooltip' data-placement='top' title='Refuser' " +
+            "            class='btn btn-outline-danger btn-rounded waves-effect waves-light'> " +
+            "             <i class='feather-trash'></i> " +
+            "        </a> ";
+    
+    return btnDelete;
+    
+}

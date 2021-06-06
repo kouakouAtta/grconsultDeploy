@@ -1,0 +1,84 @@
+<?php
+$this->headTitle('Utilisateurs');
+
+$this->mainMenu()->setActiveItemId('users');
+$this->mainMenu()->setDataTableAssets(true);
+$this->pageBreadcrumbs()->setItems([
+            'Home'=>$this->url('home'),
+            'Manage Users'=>$this->url('users'),
+            ]);
+?>
+    
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box d-flex align-items-center justify-content-between">
+                <h4 class="mb-0 font-size-18">A propos</h4>
+
+                <div class="page-title-right">
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item"><a href="<?= $this->url('admin'); ?>">Accueil</a></li>
+                        <li class="breadcrumb-item active">A propos</li>
+                    </ol>
+                </div>
+
+            </div>
+        </div>
+    </div>   
+    <div class="row">
+        <div class="col-12">
+                <?= $this->flashMessenger()->render('error', ['alert', 'alert-danger alert-dismissible fade show']); ?>
+                <?= $this->flashMessenger()->render('success', ['alert', 'alert-success alert-dismissible fade show']); ?>
+                <?= $this->flashMessenger()->render('info', ['alert', 'alert-info alert-dismissible fade show']); ?>
+        </div>
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header"> 
+                    <a class="btn btn-sm btn-primary float-right" href="<?= $this->url('apropos', ['action'=>'ajouter-apropos']); ?>">
+                      Ajouter une autre section d'apropos
+                    </a> 
+                </div>
+                <div class="card-body">
+
+                    <table id="formation-datatable" width='100%' class="table dt-responsive nowrap">
+                        <thead>
+                            <tr>
+                                <th>Libellé</th>
+                                <th>Sous libellé</th>
+                                <th>Texte</th>
+                                <th colspan="2"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($this->apropos as $aprop): 
+                              
+                            ?>
+                            <tr>
+                                <td>
+                                    <?= $aprop->getTitre();?>
+                                </td>
+                                <td>
+                                    <?= $aprop->getSousTitre();?>
+                                </td>
+                                <td>
+                                    <?= $aprop->getText();?>
+                                </td>
+                                <td colspan="1">
+                                    <a class="btn btn-sm btn-success" href="<?= $this->url('apropos', ['action'=>'editer-apropos', 'id'=>$aprop->getAproposId()]); ?>">
+                                      Editer
+                                    </a>
+                                </td>
+                                <td colspan="1">
+                                    <a class="btn btn-sm btn-danger" href="<?= $this->url('apropos', ['action'=>'supprimer-apropos', 'id'=>$aprop->getAproposId()]); ?>">
+                                      Supprimer
+                                    </a>
+                                </td>
+                            </tr>
+                            <?php endforeach; ?> 
+                        </tbody>
+                    </table>
+
+                </div> <!-- end card body-->
+            </div> <!-- end card -->
+        </div><!-- end col-->
+    </div>
+    <!-- end row-->

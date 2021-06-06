@@ -27,4 +27,9 @@ return [
     'Laminas\I18n',
     'Laminas\Router',
     'Laminas\Validator',
+    'Admin',
+    'Laminas\Mail',
+    'Laminas\Cache',
+    'Laminas\Paginator',
+    'Laminas\Serializer',
 ];

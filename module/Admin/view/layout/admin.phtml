@@ -1,0 +1,239 @@
+<?= $this->doctype() ?>
+
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <?= $this->headTitle('G&Rconsult - Admin')->setSeparator(' | ')->setAutoEscape(false) ?>
+        <?= $this->headMeta()
+            ->appendName('viewport', 'width=device-width, initial-scale=1, shrink-to-fit=no')
+            ->appendName('description', 'GABRIEL & RAPHAELE CONSULTGING.')
+            ->appendHttpEquiv('X-UA-Compatible', 'IE=edge')
+        ?>
+
+        <!-- Le styles -->
+        <link href="<?=$this->basePath('img/logogr/logogr1.jpg')?>" rel="icon">
+        <link href="<?=$this->basePath('img/logogr/logogr1.jpg')?>" rel="apple-touch-icon">
+        <!--div class="col-md-4 d-flex align-items-center py-4"><br>
+            <a class="navbar-brand text-danger rounded float-left"><img src="img/logogr/logogr3.jpg"></img><br>Gabriel & Raphaële Consulting</a>
+        </div-->
+        <?= $this->headLink(['rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . 'img/logogr/logogr1.jpg'])?>
+        <link href="<?php echo $this->basePath().'/plugins/bootstrap-touchspin/jquery.bootstrap-touchspin.css';?>" rel="stylesheet" type="text/css" />
+        <link href="<?php echo $this->basePath().'/plugins/bootstrap-datepicker/bootstrap-datepicker.min.css';?>" rel="stylesheet" type="text/css" />
+        <link href="<?php echo $this->basePath().'/plugins/select2/select2.min.css';?>" rel="stylesheet" type="text/css" />
+        
+        <?php 
+            if ($this->mainMenu()->getDataTableAssets()) {
+                
+        ?>
+        
+        <link href="<?php echo $this->basePath().'/plugins/datatables/dataTables.bootstrap4.css';?>" rel="stylesheet" type="text/css" />
+        <link href="<?php echo $this->basePath().'/plugins/datatables/responsive.bootstrap4.css';?>" rel="stylesheet" type="text/css" />
+        <link href="<?php echo $this->basePath().'/plugins/datatables/buttons.bootstrap4.css';?>" rel="stylesheet" type="text/css" />
+        <?php 
+            }
+        ?>
+        
+        <link href="<?php echo $this->basePath().'/plugins/fullcalendar/css/fullcalendar.min.css';?>" rel="stylesheet" />
+        <link href="<?php echo $this->basePath().'/plugins/sweetalert2/sweetalert2.min.css';?>" rel="stylesheet" type="text/css" />
+        
+        <link href="<?php echo $this->basePath().'/plugins/dropify/dropify.min.css';?>" rel="stylesheet" type="text/css" />
+        
+        <link href="<?php echo $this->basePath().'/plugins/select2/select2.min.css';?>" rel="stylesheet" type="text/css" />
+        <link rel="stylesheet" href="<?php echo $this->basePath()."/plugins/summernote/summernote.css";?>">
+        <link href="<?php echo $this->basePath().'/assets/css/custom.css';?>" rel="stylesheet" type="text/css" />
+        <link href="<?php echo $this->basePath().'/assets/css/bootstrap.min.css';?>" rel="stylesheet" type="text/css" />
+        <link href="<?php echo $this->basePath().'/assets/css/icons.min.css';?>" rel="stylesheet" type="text/css" />
+        <link href="<?php echo $this->basePath().'/assets/css/theme.min.css';?>" rel="stylesheet" type="text/css" />
+
+    </head>
+    
+    <body>
+        <input type="hidden" value="<?php echo $this->basePath(); ?>" id="basePath" >
+        <!-- HEADER -->
+        <div id="layout-wrapper">
+
+        <header id="page-topbar">
+            <div class="navbar-header bg-white">
+                <!-- LOGO -->
+                <div class="navbar-brand-box d-flex align-items-left">
+                    <a href="<?= $this->url('home'); ?>" class="logo">
+                        <img height="70px" src="<?php echo $this->basePath().'/img/logogr/logogr4.jpg';?>">
+                    </a>
+
+                    <button type="button" class="btn btn-sm mr-2 d-lg-none px-3 font-size-16 header-item waves-effect waves-light" id="vertical-menu-btn">
+                        <i class="fa fa-fw fa-bars"></i>
+                    </button>
+                </div>
+
+                <div class="d-flex align-items-center">
+
+                    <div class="dropdown d-none d-sm-inline-block ml-2">
+                        <button type="button" class="btn header-item noti-icon waves-effect waves-light" id="page-header-search-dropdown"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="mdi mdi-magnify"></i>
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right p-0"
+                            aria-labelledby="page-header-search-dropdown">
+                            
+                            <form class="p-3">
+                                <div class="form-group m-0">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" placeholder="Search ..." aria-label="Recipient's username">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-primary" type="submit"><i class="mdi mdi-magnify"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <?php $user = $this->mainMenu()->getConnectedUser(); ?>
+                    <?php 
+                        if($user){
+                    ?>
+                        <div class="dropdown d-inline-block ml-2">
+                            <button type="button" class="btn header-item waves-effect waves-light" id="page-header-user-dropdown"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <?php if (file_exists("data/upload/photos/o.png")){ ?>
+                                    <img class="rounded-circle header-profile-user" src="../data/upload/photos/o.png"
+                                        alt="Votre photo">
+                                <?php }else{ ?>
+                                <img class="rounded-circle header-profile-user" src="<?php echo $this->basePath()."/assets/images/users/avatar-3.jpg";?>"
+                                    alt="Votre photo">
+                                <?php } ?>
+                                <span class="d-none d-sm-inline-block ml-1"><?= $user?($user->getNom().' '.$user->getPrenoms()):''?></span>
+                                <i class="mdi mdi-chevron-down d-none d-sm-inline-block"></i>
+                            </button>
+                            
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <!--a class="dropdown-item d-flex align-items-center justify-content-between" href="#">
+                                    <i class="feather-info"></i><span>Espace Agent</span>
+                                </a-->
+                                
+                                    <a class="dropdown-item d-flex align-items-center justify-content-between" href="<?php echo $this->basePath().'/logout';?>">
+                                        <i class="feather-log-out"></i><span>Déconnexion</span>
+                                    </a>
+                                
+                            </div>
+                            
+                        </div>
+                    <?php 
+                        }
+                    ?>
+                    
+                </div>
+            </div>
+        </header>    
+        <!-- //HEADER -->
+            
+            
+        <!-- MAIN NAVIGATION -->
+        <!-- ========== Left Sidebar Start ========== -->
+        <div class="vertical-menu" style="color:#FFFFFF; background-color: #bd1522;" >
+
+            <div data-simplebar class="h-100" style="color:#FFFFFF;">
+
+                <!--- Sidemenu -->
+                <div id="sidebar-menu"  class="waves-light text-white">
+                    <!-- Left Menu Start -->
+                    <?php
+                        // Check if the activeMenuItemId passed to layout view model
+                        // and if so, use it for setting active navbar item.
+                        if (isset($activeMenuItemId)) {
+                            $this->mainMenu()->setActiveItemId($activeMenuItemId);
+                        }
+                        
+                        if (isset($activeDropdownItemId)) {
+                            $this->mainMenu()->setActiveDropdownItemId($activeDropdownItemId);
+                        }
+
+                        echo $this->mainMenu()->render();
+                        
+                     ?>
+
+                    <div class="help-box bg-secondary text-white text-bold">
+                        <h5 class="text-muted font-size-15 mb-3">Support Technique</h5>
+                        <p class="font-size-13"><span class="font-weight-bold">Email:</span> <br>mygotrex48@gmail.com <br>kouakouw.kouakou@gmail.com</p>
+                        <p class="mb-0 font-size-13"><span class="font-weight-bold">Tel : </span> <br> (+225) 07 48 42 77 78 <br> (+225) 07 09 33 34 89</p>
+                    </div>
+                </div>
+                <!-- Sidebar -->
+            </div>
+        </div>
+        <!-- Left Sidebar End -->   
+                    
+            
+        <div class="main-content">
+            <div class="page-content">
+                <div class="container">
+                    <?= $this->content; ?>  
+                </div>
+
+            </div>
+
+
+            <footer class="footer">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-sm-6">
+                        <?= date('Y'); ?> © GestParc.
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="text-sm-right d-none d-sm-block">
+                                Dévéloppé par la Direction Informatique (Direction Générale des Impôts)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </div>
+
+    </div>
+
+    <!-- Overlay-->
+    <div class="menu-overlay"></div>
+         
+        
+    <script src="<?php echo $this->basePath().'/assets/js/jquery.min.js';?>" ></script>
+    <script src="<?php echo $this->basePath().'/assets/js/bootstrap.bundle.min.js';?>" ></script>
+    <script src="<?php echo $this->basePath().'/assets/js/metismenu.min.js';?>" ></script>
+    <script src="<?php echo $this->basePath().'/assets/js/waves.js';?>" ></script>
+    <script src="<?php echo $this->basePath().'/assets/js/simplebar.min.js';?>"></script>
+    
+    <script src="<?php echo $this->basePath().'/assets/js/constantes.js';?>" ></script>
+    <script src="<?php echo $this->basePath().'/assets/js/fonction.js';?>" ></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <?php 
+        if ($this->mainMenu()->getDataTableAssets()) {
+    ?>
+    <script src="<?php echo $this->basePath().'/plugins/datatables/jquery.dataTables.min.js';?>" ></script>
+    <script src="<?php echo $this->basePath().'/plugins/datatables/dataTables.bootstrap4.js';?>" ></script>
+    <script src="<?php echo $this->basePath().'/plugins/datatables/dataTables.responsive.min.js';?>" ></script>
+    <script src="<?php echo $this->basePath().'/plugins/datatables/responsive.bootstrap4.min.js';?>" ></script>
+    <script src="<?php echo $this->basePath().'/plugins/datatables/dataTables.buttons.min.js';?>" ></script>
+    <?php 
+        }
+    ?>
+    <script src="<?php echo $this->basePath().'/plugins/jquery-ui/jquery-ui.min.js';?>" ></script>
+    <script src="<?php echo $this->basePath().'/plugins/moment/moment.js';?>" ></script>
+    <script src="<?php echo $this->basePath().'/plugins/bootstrap-touchspin/jquery.bootstrap-touchspin.min.js';?>"></script>
+    <script src="<?php echo $this->basePath().'/plugins/bootstrap-datepicker/bootstrap-datepicker.min.js';?>"></script>
+    <script src="<?php echo $this->basePath().'/plugins/fullcalendar/js/fullcalendar.min.js';?>" ></script>
+    <script src="<?php echo $this->basePath().'/plugins/fullcalendar/js/sample_french.js';?>" ></script>
+    <script src="<?php echo $this->basePath().'/plugins/sweetalert2/sweetalert2.min.js';?>"></script>
+    <script src="<?php echo $this->basePath().'/plugins/jquery-mask/jquery.mask.min.js';?>"></script>
+    <script src="<?php echo $this->basePath().'/plugins/dropify/dropify.min.js';?>"></script>
+    <script src="<?php echo $this->basePath().'/plugins/select2/select2.min.js';?>"></script>
+    <script src="<?php echo $this->basePath()."/plugins/summernote/summernote.js"; ?>"></script> 
+    <script src="<?php echo $this->basePath()."/plugins/autonumeric/autoNumeric-min.js"; ?>"></script> 
+    <?php //var_dump($this->controller) ?>
+    <?php if (file_exists(__DIR__."/../../../../public/assets/pages/$this->controller/$this->action.js")){ ?>
+        
+        <script src="<?php echo $this->basePath()."/assets/pages/$this->controller/$this->action.js"; ?>"></script>
+    <?php } ?>
+    
+        
+    <?= $this->inlineScript() ?>
+    <script src="<?php echo $this->basePath().'/assets/js/theme.js';?>" ></script>
+    </body>
+</html>
